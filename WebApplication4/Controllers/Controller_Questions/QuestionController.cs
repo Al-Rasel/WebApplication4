@@ -7,19 +7,36 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using WebApplication4.Models;
 
 namespace WebApplication4.Controllers.Controller_Questions
 {
     public class QuestionController : ApiController
     {
 
-        [HttpGet, Route(template: "getRasel/{a}")]
-        public IHttpActionResult GetCustomerProductRating(int a)
+        [HttpPost, Route(template: "getProfile")]
+        public IHttpActionResult GetCustomerProductRating([FromBody]UnitProfile singleProfile)
         {
             try
             {
-                
-                return Ok(content: "rasel");
+
+                var filePath = @"F:\ApiProjects\WebApplication4\WebApplication4\Models\person.json";
+                // Read existing json data
+                var jsonData = System.IO.File.ReadAllText(filePath);
+                // De-serialize to object or create new list
+                var employeeList = JsonConvert.DeserializeObject<List<UnitProfile>>(jsonData)
+                                      ?? new List<UnitProfile>();
+
+                // Add any new employees
+                employeeList.Add(singleProfile);
+               
+                // Update json data string
+                jsonData = JsonConvert.SerializeObject(employeeList);
+                System.IO.File.WriteAllText(filePath, jsonData);
+                JArray o1 = JArray.Parse(File.ReadAllText(@"F:\ApiProjects\WebApplication4\WebApplication4\Models\person.json"));
+
+
+                return Ok(content:o1);
             }
             catch (Exception exception)
             {
@@ -32,7 +49,7 @@ namespace WebApplication4.Controllers.Controller_Questions
             try
             {
 
-                JObject o1 = JObject.Parse(File.ReadAllText(@"D:\aaa\WebApplication4\WebApplication4\Models\datamanagementandanalysis-export.json"));
+                JObject o1 = JObject.Parse(File.ReadAllText(@"F:\ApiProjects\WebApplication4\WebApplication4\Models\datamanagementandanalysis-export.json"));
 
                 // read JSON directly from a file
                 //using (StreamReader file = File.OpenText(@"D:\aaa\WebApplication4\WebApplication4\Models\datamanagementandanalysis-export.json"))
@@ -43,7 +60,7 @@ namespace WebApplication4.Controllers.Controller_Questions
                 //hlw 
 
                 JArray rssTitle = (JArray)o1["array"]["SubSubcategories"]; 
-                JArray rssTitlee = (JArray)rssTitle;
+                JArray rssTitlee = rssTitle;
 
                 return Ok(content: rssTitlee.Skip(lastIndex).Take(nextIteams));
             }
