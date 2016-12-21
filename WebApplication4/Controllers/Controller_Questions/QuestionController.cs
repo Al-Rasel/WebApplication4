@@ -28,18 +28,38 @@ namespace WebApplication4.Controllers.Controller_Questions
                 // De-serialize to object or create new list
                 var employeeList = JsonConvert.DeserializeObject<List<SignUp>>(jsonData)
                                       ?? new List<SignUp>();
-
+                string responseToTheUser="";
+                string name = "";
                 // Add any new employees
-                employeeList.Add(singleProfile);
-               
-                // Update json data string
-                jsonData = JsonConvert.SerializeObject(employeeList);
-                System.IO.File.WriteAllText(filePath, jsonData);
+                if (singleProfile != null) {
+
+                    JArray arrayOfUSer = JArray.Parse(File.ReadAllText(@"F:\ApiProjects\WebApplication4\WebApplication4\Models\AuthData\UserAuthData.json"));
+                    string email = singleProfile.Email;
+                    string quarry = "[?(@.Email == " + "'" + email + "'"  + ")]";
+
+                    JToken acme = arrayOfUSer.SelectToken(quarry);
+
+                   //  name =  acme.Value<string>("Name");
+
+
+                    if (acme == null)
+                    {
+                        employeeList.Add(singleProfile);
+                        // Update json data string
+                        jsonData = JsonConvert.SerializeObject(employeeList);
+                        System.IO.File.WriteAllText(filePath, jsonData);
+                        responseToTheUser = "Successfully User Added";
+                    }
+                    else {
+                        responseToTheUser = "Email Already Exists";
+                    }
+                }
+
+
                 JArray o1 = JArray.Parse(File
-                    .ReadAllText(@"F:\ApiProjects\WebApplication4\WebApplication4\Models\AuthData\UserAuthData.json"));
+                       .ReadAllText(@"F:\ApiProjects\WebApplication4\WebApplication4\Models\AuthData\UserAuthData.json"));
 
-
-                return Ok(content:o1);
+                return Ok(content: responseToTheUser);
             }
             catch (Exception exception)
             {
