@@ -120,7 +120,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\UnitProfile.cs" />
+    <Compile Include="Models\AuthData\SignIn.cs" />
+    <Compile Include="Models\AuthData\SignUp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -128,8 +129,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Models\datamanagementandanalysis-export.json" />
-    <Content Include="Models\person.json" />
+    <Content Include="Models\AuthData\UserAuthData.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

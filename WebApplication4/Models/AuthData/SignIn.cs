@@ -3,16 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace WebApplication4.Models
+namespace WebApplication4.Models.AuthData
 {
-    public class UnitProfile
+    public class SignIn
     {
-
-        
-        public int deviceId { get; set; }
-        public string Name { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-    
-}
+
+    }
 }
