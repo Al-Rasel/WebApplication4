@@ -1,11 +1,13 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 using WebApplication4.Models;
 using WebApplication4.Models.AuthData;
@@ -22,7 +24,7 @@ namespace WebApplication4.Controllers.Controller_Questions
             {
 
                 var filePath =
-                    @"C:\Users\Rasel\Source\Repos\WebApplication4\WebApplication4\Models\AuthData\UserAuthData.json";
+                  HttpContext.Current.Server.MapPath("~/Models/AuthData/UserAuthData.json");
                 // Read existing json data
                 var jsonData = System.IO.File.ReadAllText(filePath);
                 // De-serialize to object or create new list
@@ -33,7 +35,7 @@ namespace WebApplication4.Controllers.Controller_Questions
                 // Add any new employees
                 if (singleProfile != null) {
 
-                    JArray arrayOfUSer = JArray.Parse(File.ReadAllText(@"C:\Users\Rasel\Source\Repos\WebApplication4\WebApplication4\Models\AuthData\UserAuthData.json"));
+                    JArray arrayOfUSer = JArray.Parse(File.ReadAllText(HttpContext.Current.Server.MapPath("~/Models/AuthData/UserAuthData.json")));
                     string email = singleProfile.Email;
                     string quarry = "[?(@.Email == " + "'" + email + "'"  + ")]";
 
@@ -57,7 +59,7 @@ namespace WebApplication4.Controllers.Controller_Questions
 
 
                 JArray o1 = JArray.Parse(File
-                       .ReadAllText(@"C:\Users\Rasel\Source\Repos\WebApplication4\WebApplication4\Models\AuthData\UserAuthData.json"));
+                       .ReadAllText(HttpContext.Current.Server.MapPath("~/Models/AuthData/UserAuthData.json")));
 
                 return Ok(content: responseToTheUser);
             }
@@ -73,7 +75,9 @@ namespace WebApplication4.Controllers.Controller_Questions
         {
             try
             {
-                JArray arrayOfUSer = JArray.Parse(File.ReadAllText(@"C:\Users\Rasel\Source\Repos\WebApplication4\WebApplication4\Models\AuthData\UserAuthData.json"));
+
+
+                JArray arrayOfUSer = JArray.Parse(File.ReadAllText(HttpContext.Current.Server.MapPath("~/Models/AuthData/UserAuthData.json")));
                 string email = signInData.Email;
                 string quarry = "[?(@.Email == " +"'"+ signInData.Email +"'"+"&&"+ "@.Password ==" + "'" + signInData.Password + "'"+ ")]";
 
@@ -103,7 +107,7 @@ namespace WebApplication4.Controllers.Controller_Questions
             {
 
                 JObject o1 = JObject.Parse(File
-                    .ReadAllText(@"F:\ApiProjects\WebApplication4\WebApplication4\Models\datamanagementandanalysis-export.json"));
+                    .ReadAllText(HttpContext.Current.Server.MapPath("~/Models/AuthData/UserAuthData.json")));
 
                 // read JSON directly from a file
                 //using (StreamReader file = File.OpenText(@"D:\aaa\WebApplication4\WebApplication4\Models\datamanagementandanalysis-export.json"))

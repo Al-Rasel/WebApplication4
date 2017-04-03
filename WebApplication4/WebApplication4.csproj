@@ -131,6 +131,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Models\AuthData\UserAuthData.json" />
+    <None Include="Properties\PublishProfiles\RaselCheck.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
