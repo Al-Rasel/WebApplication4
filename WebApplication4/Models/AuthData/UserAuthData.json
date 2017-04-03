@@ -1,15 +1,1 @@
-[
-  {
-    "deviceId": 19,
-    "Name": "Rasel",
-    "Email": "mdalrasel1@gmail.com",
-    "Password": "hlw"
-  },
-  {
-    "deviceId": 20,
-    "Name": "Shovon",
-    "Email": "mdshovon@gmail.com",
-    "Password": "hlw1"
-  }
-
-]
+[{"deviceId":19,"Name":"Rasel","Email":"mdalrasel1@gmail.com","Password":"hlw"},{"deviceId":20,"Name":"Shovon","Email":"mdshovon@gmail.com","Password":"hlw1"},{"deviceId":121,"Name":"Name","Email":"sample@gmail.com","Password":"1215"},{"deviceId":121,"Name":"Name","Email":"sample1@gmail.com","Password":"1215"}]

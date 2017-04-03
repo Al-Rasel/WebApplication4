@@ -22,7 +22,7 @@ namespace WebApplication4.Controllers.Controller_Questions
             {
 
                 var filePath =
-                    @"F:\ApiProjects\WebApplication4\WebApplication4\Models\AuthData\UserAuthData.json";
+                    @"C:\Users\Rasel\Source\Repos\WebApplication4\WebApplication4\Models\AuthData\UserAuthData.json";
                 // Read existing json data
                 var jsonData = System.IO.File.ReadAllText(filePath);
                 // De-serialize to object or create new list
@@ -33,7 +33,7 @@ namespace WebApplication4.Controllers.Controller_Questions
                 // Add any new employees
                 if (singleProfile != null) {
 
-                    JArray arrayOfUSer = JArray.Parse(File.ReadAllText(@"F:\ApiProjects\WebApplication4\WebApplication4\Models\AuthData\UserAuthData.json"));
+                    JArray arrayOfUSer = JArray.Parse(File.ReadAllText(@"C:\Users\Rasel\Source\Repos\WebApplication4\WebApplication4\Models\AuthData\UserAuthData.json"));
                     string email = singleProfile.Email;
                     string quarry = "[?(@.Email == " + "'" + email + "'"  + ")]";
 
@@ -57,7 +57,7 @@ namespace WebApplication4.Controllers.Controller_Questions
 
 
                 JArray o1 = JArray.Parse(File
-                       .ReadAllText(@"F:\ApiProjects\WebApplication4\WebApplication4\Models\AuthData\UserAuthData.json"));
+                       .ReadAllText(@"C:\Users\Rasel\Source\Repos\WebApplication4\WebApplication4\Models\AuthData\UserAuthData.json"));
 
                 return Ok(content: responseToTheUser);
             }
@@ -73,7 +73,7 @@ namespace WebApplication4.Controllers.Controller_Questions
         {
             try
             {
-                JArray arrayOfUSer = JArray.Parse(File.ReadAllText(@"F:\ApiProjects\WebApplication4\WebApplication4\Models\AuthData\UserAuthData.json"));
+                JArray arrayOfUSer = JArray.Parse(File.ReadAllText(@"C:\Users\Rasel\Source\Repos\WebApplication4\WebApplication4\Models\AuthData\UserAuthData.json"));
                 string email = signInData.Email;
                 string quarry = "[?(@.Email == " +"'"+ signInData.Email +"'"+"&&"+ "@.Password ==" + "'" + signInData.Password + "'"+ ")]";
 
