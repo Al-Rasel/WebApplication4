@@ -7,11 +7,12 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using WebApplication4.Models;
 using WebApplication4.Models.AuthData;
-
+using personModel = WebApplication4.CacheControl.CachedOkResult<System.Collections.Generic.IEnumerable<WebApplication4.Models.AuthData.Person>>;
 namespace WebApplication4.Controllers.Controller_Questions
 {
     public class QuestionController : ApiController
@@ -92,6 +93,33 @@ namespace WebApplication4.Controllers.Controller_Questions
             }
         }
 
+
+
+
+        [HttpPost, Route(template: "persons")]
+        public async Task<IHttpActionResult> persons([FromBody]SignIn signInData)
+        {
+            try
+            {
+                Person objPerson = new Person();
+                var a = await objPerson.GetAllSubCategories(4);
+
+
+                JArray arrayOfUSer = JArray.Parse(File.ReadAllText(HttpContext.Current.Server.MapPath("~/Models/AuthData/UserAuthData.json")));
+                string email = signInData.Email;
+                string quarry = "[?(@.Email == " + "'" + signInData.Email + "'" + "&&" + "@.Password ==" + "'" + signInData.Password + "'" + ")]";
+
+                JToken acme = arrayOfUSer.SelectToken(quarry);
+
+
+                return personModel.CachedOk(controller: this, content: a,
+                    cachingTimeSpan: TimeSpan.FromHours(value: 1)); ;
+            }
+            catch (Exception exception)
+            {
+                return InternalServerError(exception: exception);
+            }
+        }
 
 
 
